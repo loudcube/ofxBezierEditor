@@ -13,10 +13,14 @@ class draggableVertex{
         bool 	bBeingSelected;
 };
 
+
+
 class ofxBezierEditor{
 
 	public:
-	    ~ofxBezierEditor();
+		
+	    
+		~ofxBezierEditor();
         ofxBezierEditor();
 
         vector <draggableVertex> curveVertices;
@@ -26,8 +30,8 @@ class ofxBezierEditor{
 		void createPolyLineFromPoints();
 
         string xmlFilename;
-		void loadXmlPoints(string filename);
-		void saveXmlPoints(string filename);
+		void loadXmlPoints(string filename = "ofxBezierInfo.xml");
+		void saveXmlPoints(string filename = "ofxBezierInfo.xml");
 
 		int getCurrentPointToMove(){ return currentPointToMove; };
 		void setCurrentPointToMove(int p){ currentPointToMove = p; };
@@ -42,8 +46,13 @@ class ofxBezierEditor{
         virtual void mouseDragged(ofMouseEventArgs &args);
         virtual void mousePressed(ofMouseEventArgs &args);
         virtual void mouseReleased(ofMouseEventArgs &args);
-        virtual void keyPressed(ofKeyEventArgs &args);
+		virtual void mouseScrolled(ofMouseEventArgs& args) {}
+		virtual void mouseEntered(ofMouseEventArgs& args) {}
+		virtual void mouseExited(ofMouseEventArgs& args) {}
+
+		virtual void keyPressed(ofKeyEventArgs &args);
         virtual void keyReleased(ofKeyEventArgs &args);
+
 
         int getRadiusVertex(){ return radiusVertex; };
 		void setRadiusVertex(int r){ radiusVertex = r; };
@@ -80,6 +89,12 @@ class ofxBezierEditor{
 		void setReactToMouseAndKeyEvents(bool b);
 
 	private:
+		void updateBoundingBox();
+		void calculateCenter();
+
+
+	private:
+
         int currentPointToMove;
 		int lastVertexSelected;
 
@@ -94,11 +109,10 @@ class ofxBezierEditor{
 		int strokeWeight;
 
 		ofRectangle boundingBox;
-		void updateBoundingBox();
 		bool bshowBoundingBox;
 
 		ofPoint center;
-        void calculateCenter();
+        
 
 		float translateX, translateY;
 		float mouseX, mouseY;

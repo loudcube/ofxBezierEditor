@@ -52,8 +52,6 @@ ofxBezierEditor::ofxBezierEditor(){
 
 	translateX = translateY = 0;
 
-	xmlFilename = "ofxBezierInfo.xml";
-
 	setReactToMouseAndKeyEvents(true);
 }
 
@@ -69,7 +67,7 @@ void ofxBezierEditor::setReactToMouseAndKeyEvents(bool b){
     }
 }
 //--------------------------------------------------------------
-void ofxBezierEditor::loadXmlPoints(string filename){
+void ofxBezierEditor::loadXmlPoints(string filename) {
     xmlFilename = filename;
     XMLbezier.loadFile(xmlFilename);
     curveVertices.clear();
@@ -79,7 +77,7 @@ void ofxBezierEditor::loadXmlPoints(string filename){
     bfillBezier = XMLbezier.getValue("bezier:fill", true);
 	colorFill.set(XMLbezier.getValue("bezier:colorFill:r", 200), XMLbezier.getValue("bezier:colorFill:g", 200), XMLbezier.getValue("bezier:colorFill:b", 200), XMLbezier.getValue("bezier:colorFill:a", 200));
 	colorStroke.set(XMLbezier.getValue("bezier:colorStroke:r", 100), XMLbezier.getValue("bezier:colorStroke:g", 100), XMLbezier.getValue("bezier:colorStroke:b", 100), XMLbezier.getValue("bezier:colorStroke:a", 200));
-	strokeWeight = XMLbezier.getValue("bezier:strokeWeight", 1);
+	strokeWeight = XMLbezier.getValue("bezier:strokeWeight", 0);
 
 	int nCurveVertices = XMLbezier.getNumTags("vertex");
     if(nCurveVertices > 0){
